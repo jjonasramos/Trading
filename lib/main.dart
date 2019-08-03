@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trading/login/login.dart';
+import 'package:trading/login/loginByEmail.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Trading',
       theme: ThemeData(primarySwatch: Colors.green),
-      home: Login(),
+      home: LoginByEmail(),
     );
   }
 }

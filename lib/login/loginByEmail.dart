@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trading/Dialogs.dart';
 
-class Login extends StatefulWidget {
+import 'loginStartScreen.dart';
+
+class LoginByEmail extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _LoginByEmailState createState() => _LoginByEmailState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginByEmailState extends State<LoginByEmail> {
 
+  // Variables ====================================================
   bool _isHidden = true;
 
+  // Dialog =======================================================
+  Dialogs dialogs = new Dialogs();
+
+  // Controllers ==================================================
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController senhaController = new TextEditingController();
+
+  // Methods ======================================================
   void _toggleVisibility() {
     setState(() {
      _isHidden = !_isHidden;
     });
+  }
+
+  bool _validateLoginByEmail(String email, String senha) {
+
+    if(email.trim().length > 0 && senha.trim().length > 0) { // TODO: Implementar a validação de LoginByEmail por usuario e senha
+      return true;
+    }
+
+    return false;
   }
 
   @override
@@ -22,6 +43,7 @@ class _LoginState extends State<Login> {
     super.initState();
   }
 
+  // Interface ====================================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +51,16 @@ class _LoginState extends State<Login> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+          
           child: Column( // Column porque os objetos estão organizados em coluna
             children: <Widget>[
               Container(
                 width: MediaQuery.of(context).size.width, // ocupar o tamanho da tela em largura
                 height: MediaQuery.of(context).size.height/2.5,
+                margin: EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                ),
 
                 decoration: BoxDecoration( // estilizar o container
                   gradient: LinearGradient(
@@ -126,6 +153,7 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                       child: TextField(
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           focusColor: Colors.green,
@@ -162,6 +190,7 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                       child: TextField(
+                        controller: senhaController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -199,10 +228,19 @@ class _LoginState extends State<Login> {
                     ),
 
                     Spacer(),
-
+                    
                     GestureDetector(
-                      onTap: () {
-                        print('Entrar...'); // TODO: Implementar o login por usuário e senha
+                      onTap: () async {
+                        if(_validateLoginByEmail(emailController.text, senhaController.text)) {
+                          dialogs.waiting(context, 'Entrando', 'Fazendo LoginByEmail...');
+                          await Future.delayed(Duration(seconds: 2));
+                          Navigator.pop(context);
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+
+                        } else {
+                          dialogs.errorLogin(context, 'Erro', 'Usuário ou Senha pode estar errado. Tente novamente.');
+                        }
                       },
                       child: Container(
                         height: 50,
