@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50),
+                  bottomLeft: Radius.circular(90),
+                  bottomRight: Radius.circular(90),
                 ),
               ),
 
