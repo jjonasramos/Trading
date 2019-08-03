@@ -12,7 +12,7 @@ class _LoginState extends State<Login> {
 
   void _toggleVisibility() {
     setState(() {
-     _isHidden = !_isHidden; 
+     _isHidden = !_isHidden;
     });
   }
 
@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
 
                     Align(
                       alignment: Alignment.center,
-                      child: Icon(Icons.person,
+                      child: Icon(Icons.monetization_on,
                         size: 90,
                         color: Colors.white,
                       ),
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                           bottom: 32,
                           top: 32
                         ),
-                        child: Text('Trading'.toUpperCase(),
+                        child: Text('Trading',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -128,10 +128,9 @@ class _LoginState extends State<Login> {
                       child: TextField(
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
+                          focusColor: Colors.green,
                           border: InputBorder.none,
-                          icon: Icon(Icons.email,
-                            color: Colors.grey,
-                          ),
+                          icon: Icon(Icons.email),
                           hintText: 'E-mail'
                         ),
                       ),
@@ -166,13 +165,12 @@ class _LoginState extends State<Login> {
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          icon: Icon(Icons.vpn_key,
-                            color: Colors.grey,
-                          ),
+                          icon: Icon(Icons.vpn_key,),
                           hintText: 'Senha',
                           suffixIcon: IconButton(
                             onPressed: _toggleVisibility,
                             icon: Icon(Icons.visibility_off),
+                            splashColor: Colors.white,
                           ),
                         ),
                         
@@ -180,52 +178,63 @@ class _LoginState extends State<Login> {
                     ),
 
                     Align(
-                      alignment: Alignment.centerRight,
+                      alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.only(
-                          top: 26,
-                          right: 32
+                          top: 32,
+                          //right: 32
                         ),
-                        child: Text('Esqueceu sua senha?',
-                          style: TextStyle(
-                            color: Colors.grey,
+                        child: GestureDetector(
+                          onTap: () {
+                             print("Mandar para tela de recuperar senha"); // TODO:: Implementar a recuperação de senha
+                          },
+                          child: Text("Esqueceu sua senha?",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15
+                            ),
                           ),
-                        ),
+                        )
                       ),
                     ),
 
                     Spacer(),
 
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width/1.2,
+                    GestureDetector(
+                      onTap: () {
+                        print('Entrar...'); // TODO: Implementar o login por usuário e senha
+                      },
+                      child: Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width/1.2,
 
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF43a047),
-                            Color(0xFF8bc34a),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF43a047),
+                              Color(0xFF8bc34a),
+                            ],
+                          ),
+
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50)
+                          ),
+
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 5,
+                              offset: Offset(0, 5),
+                            ),
                           ],
                         ),
 
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50)
-                        ),
-
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
-                      ),
-
-                      child: Center(
-                        child: Text('Entrar'.toUpperCase(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                        child: Center(
+                          child: Text('Entrar'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -233,7 +242,6 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
