@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
                           icon: Icon(Icons.vpn_key,
                             color: Colors.grey,
                           ),
-                          hintText: hintText,
+                          hintText: 'Senha',
                           suffixIcon: IconButton(
                             onPressed: _toggleVisibility,
                             icon: Icon(Icons.visibility_off),
