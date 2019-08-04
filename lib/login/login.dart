@@ -222,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await Future.delayed(Duration(seconds: 2));
                             Navigator.pop(context);
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen())); // TODO: Mandar para tela inicial
 
                           } else {
                             dialogs.errorLogin(context, 'Erro', 'Usuário ou Senha pode estar errado. Tente novamente.');
@@ -234,8 +234,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   Container(
                     padding: EdgeInsets.only(
-                      left: 48,
-                      right: 48,
+                      left: MediaQuery.of(context).size.width/1.26/9,
+                      right: MediaQuery.of(context).size.width/1.26/9,
                       top: 32,
                     ),
                     child: Row(
@@ -278,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Material(
-                                  elevation: 4.0,
+                                  elevation: 6.0,
                                   shape: CircleBorder(),
                                   color: Colors.white,
                                   child: Padding(
@@ -303,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
 
                                 Material(
-                                  elevation: 4.0,
+                                  elevation: 6.0,
                                   shape: CircleBorder(),
                                   color: Colors.transparent,
                                   child: Ink.image(
@@ -331,8 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: EdgeInsets.only(
                       top: 48
                     ),
-                    
-                    //color: Colors.grey,
+
                     child: GestureDetector(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -356,7 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       onTap: () {
-                        print('Entrandooooo');  // TODO: Criar tela de criar conta
+                        // TODO: Criar tela de criar conta
                       },
                     ),
                   ),
