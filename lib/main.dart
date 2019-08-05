@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Trading',
       theme: ThemeData(primarySwatch: Colors.green),
       home: LoginScreen(),
