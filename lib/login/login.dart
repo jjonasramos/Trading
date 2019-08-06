@@ -36,10 +36,20 @@ class _LoginScreenState extends State<LoginScreen> {
     return false;
   }
 
+  void _createAccount() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => CreateAccountDialog(
+        title: 'Teste',
+        description: 'asdSAD',
+      ),
+    );
+  }
+
   @override
   void initState() {
 
-    //SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
   }
 
@@ -366,16 +376,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void _createAccount() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CreateAccountDialog(
-        title: 'Teste',
-        description: 'asdSAD',
       ),
     );
   }
