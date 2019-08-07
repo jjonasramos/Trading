@@ -36,14 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return false;
   }
 
-  void _createAccount() {
+  void _openDialog(String type) {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) => CreateAccountDialog(
-        title: 'Teste',
-        description: 'asdSAD',
-      ),
+      //builder: (BuildContext context) => type == 'create' ? CreateAccountDialog() : ReminderPasswordDialog(),
     );
   }
 
@@ -183,7 +180,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       onTap: () { // TODO: Implementar o esqueceu a senha
-                        print('Entreiiiii');
+                        //_openDialog('reminder');
+                        dialogs.reminderPassword(context);
                       },
                     ),
 
@@ -229,14 +227,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           onTap: () async {
                              if(_validateLoginByEmail()) {
-                              dialogs.waiting(context, 'Entrando', 'Fazendo LoginByEmail...');
+                              //dialogs.waiting(context, 'Entrando', 'Fazendo LoginByEmail...');
                               await Future.delayed(Duration(seconds: 2));
                               Navigator.pop(context);
 
                               // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen())); // TODO: Mandar para tela inicial
 
                             } else {
-                              dialogs.errorLogin(context, 'Erro', 'Usuário ou Senha pode estar errado. Tente novamente.');
+                              //dialogs.errorLogin(context, 'Erro', 'Usuário ou Senha pode estar errado. Tente novamente.');
                             } 
                           },
                         ),
@@ -366,7 +364,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                         onTap: () {
-                          _createAccount();
+                          //_openDialog('create');
+                          dialogs.createAccount(context);
                         },
                       ),
                     ),

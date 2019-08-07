@@ -1,66 +1,320 @@
 import 'package:flutter/material.dart';
 import 'package:trading/customization/AppColors.dart';
 
+double _heightButton = 50;
+double _width;
+double _height;
+
 class Dialogs {
-  errorLogin(BuildContext context, String title, String description) { // Função para chamar o Dialog
-    return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(description)
-              ],
-            ),
-          ),
 
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
-            )
-          ],
-        );
-      } 
-    );
-  }
+  createAccount(BuildContext context) {
 
-  waiting(BuildContext context, String title, String description) { // Função para chamar o Dialog
+    _width = MediaQuery.of(context).size.width/1.2;
+    _height = MediaQuery.of(context).size.height/1.2/11;
+
+    TextEditingController emailController = new TextEditingController();
+    TextEditingController passwordController = new TextEditingController();
+    TextEditingController confirmController = new TextEditingController();
+
     return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+          elevation: 0.0,
+          child: Container(
+            height: 455,
+            width: _width,
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(16)
+            ),
+            child: Column(
               children: <Widget>[
-                Text(description)
+                
+                _header(_width, _height, context, 'Criar Conta'),
+
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 32,
+                    left: 12,
+                    right: 12
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Os seguintes requisitos devem ser seguidos:',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle (
+                                height: 1.2,
+                                color: Colors.black54,
+                              ),
+                            ),
+
+                            Text('- Ser um um e-mail válido.',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle (
+                                height: 1.2,
+                                color: Colors.black54,
+                              ),
+                            ),
+
+                            Text('- A senha deve conter pelo menos 6 dígitos.',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle (
+                                height: 1.2,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      _textField(emailController, TextInputType.emailAddress, Icons.email, 'E-mail'),
+                      _textField(passwordController, TextInputType.text, Icons.vpn_key, 'Senha'),
+                      _textField(confirmController, TextInputType.text, Icons.vpn_key, 'Confirmar senha'),
+
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 22
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            FlatButton(
+                              child: Text('CANCELAR',
+                                style: TextStyle(
+                                  color: Colors.black38
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                            ),
+
+                            FlatButton(
+                              child: Text('ENVIAR',
+                                style: TextStyle(
+                                  color: AppColors.green_light,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-
-          
         );
       } 
     );
   }
+
+  reminderPassword(BuildContext context) {
+
+    _width = MediaQuery.of(context).size.width/1.2;
+    _height = MediaQuery.of(context).size.height/1.2/11;
+
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+          elevation: 0.0,
+          child: Container(
+            height: 315,
+            width: _width,
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(16)
+            ),
+            child: Column(
+              children: <Widget>[
+                
+                _header(_width, _height, context, 'Redefinir Senha'),
+
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 32,
+                    left: 12,
+                    right: 12
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Text('Será enviado um link para redefinição de senha para o e-mail que deve-se informar abaixo.',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle (
+                          height: 1.2,
+                          color: Colors.black54,
+                        ),
+                      ),
+
+                      Container(
+                        height: _heightButton,
+                        width: _width,
+                        padding: EdgeInsets.only(
+                          top: 4, 
+                          left: 16, 
+                          right: 16, 
+                          bottom: 4
+                        ),
+                        margin: EdgeInsets.only(top: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 5,
+                              offset: Offset(0,5)
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(50)
+                        ),
+                        
+                        child: TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          cursorColor: AppColors.green_dark,
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.email),
+                            focusColor: AppColors.green_dark,
+                            border: InputBorder.none,
+                            hintText: 'E-mail'
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 22
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            FlatButton(
+                              child: Text('CANCELAR',
+                                style: TextStyle(
+                                  color: Colors.black38
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                            ),
+
+                            FlatButton(
+                              child: Text('ENVIAR',
+                                style: TextStyle(
+                                  color: AppColors.green_light,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop(context);
+                              },
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      } 
+    );
+  }
+
+  Widget _header(double _width, double _height, BuildContext context, String title) {
+  return Container(
+    width: _width,
+    height: _height,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
+      gradient: LinearGradient(
+        colors: [
+          AppColors.green_dark,
+          AppColors.green_light
+        ],
+      )
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.white
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
+  Widget _textField(TextEditingController controller, TextInputType keyboardType, IconData icon, String hintText) {
+    return Container(
+      height: _heightButton,
+      width: _width,
+      padding: EdgeInsets.only(
+        top: 4, 
+        left: 16, 
+        right: 16, 
+        bottom: 4
+      ),
+      margin: EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 5,
+            offset: Offset(0,5)
+          ),
+        ],
+        borderRadius: BorderRadius.circular(50)
+      ),
+      
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        cursorColor: AppColors.green_dark,
+        decoration: InputDecoration(
+          icon: Icon(icon),
+          focusColor: AppColors.green_dark,
+          border: InputBorder.none,
+          hintText: hintText
+        ),
+      ),
+    );
+  }
+}
+/*
 class CreateAccountDialog extends StatelessWidget {
-
-  final String title, description;
-
-  CreateAccountDialog({
-    @required this.title,
-    @required this.description,
-  });
 
   @override
   Widget build(BuildContext context) {
+    final double _width = MediaQuery.of(context).size.width/1.2;
+    final double _height = MediaQuery.of(context).size.height/1.2/11;
+    final double _heightButton = 50;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       elevation: 0.0,
@@ -69,10 +323,6 @@ class CreateAccountDialog extends StatelessWidget {
   }
 
   dialogContent(BuildContext context) {
-
-    final double _width = MediaQuery.of(context).size.width/1.2;
-    final double _height = MediaQuery.of(context).size.height/1.2/11;
-    final double _heightButton = 50;
 
     return Container(
       padding: EdgeInsets.only(
@@ -309,3 +559,26 @@ class CreateAccountDialog extends StatelessWidget {
     );
   }
 }
+
+class ReminderPasswordDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      elevation: 0.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      child: dialogContent(context),
+    );
+  }
+
+  dialogContent(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: <Widget>[
+          _header(),
+        ],
+      ),
+    );
+  }
+}
+*/
+
