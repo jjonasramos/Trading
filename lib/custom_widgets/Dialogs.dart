@@ -24,7 +24,7 @@ class Dialogs {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           elevation: 0.0,
           child: Container(
-            height: 455,
+            height: 470,
             width: _width,
             decoration: BoxDecoration(
               color: Theme.of(context).scaffoldBackgroundColor,
@@ -37,7 +37,7 @@ class Dialogs {
 
                 Container(
                   padding: EdgeInsets.only(
-                    top: 32,
+                    top: 24,
                     left: 12,
                     right: 12
                   ),
@@ -45,7 +45,7 @@ class Dialogs {
                     children: <Widget>[
                       Container(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text('Os seguintes requisitos devem ser seguidos:',
                               textAlign: TextAlign.justify,
@@ -55,19 +55,25 @@ class Dialogs {
                               ),
                             ),
 
-                            Text('- Ser um um e-mail válido.',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle (
-                                height: 1.2,
-                                color: Colors.black54,
-                              ),
-                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 6, left: 12, right: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('- Ser um um e-mail válido.',
+                                    style: TextStyle (
+                                      height: 1.2,
+                                      color: AppColors.green_dark,
+                                    ),
+                                  ),
 
-                            Text('- A senha deve conter pelo menos 6 dígitos.',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle (
-                                height: 1.2,
-                                color: Colors.black54,
+                                  Text('- A senha deve conter pelo menos 6 dígitos.',
+                                    style: TextStyle (
+                                      height: 1.2,
+                                      color: AppColors.green_dark,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
