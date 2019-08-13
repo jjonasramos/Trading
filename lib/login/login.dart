@@ -15,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController senhaController = new TextEditingController();
+  AnimationController _loginButtonController;
 
   Dialogs dialogs = new Dialogs();
 
@@ -36,18 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return false;
   }
 
-  void _openDialog(String type) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      //builder: (BuildContext context) => type == 'create' ? CreateAccountDialog() : ReminderPasswordDialog(),
-    );
-  }
-
   @override
   void initState() {
-
     super.initState();
+    _loginButtonController = new AnimationController(
+      duration: new Duration(milliseconds: 3000),
+      vsync: this
+    );
   }
 
   @override
